@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 const val SAMPLE_FILE = "p1.sample.txt"
 
-class Day1Test {
+class Day2Test {
 
     @Test
     fun `day1 sample`() {

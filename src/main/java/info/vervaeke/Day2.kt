@@ -1,15 +1,9 @@
 package info.vervaeke
 
-import info.vervaeke.Day2.Companion.REAL_INPUT
 import java.io.File
 import kotlin.text.Charsets.UTF_8
 
 class Day2(val fileName: String) {
-
-    companion object {
-        const val SAMPLE_INPUT = "p1.sample.txt"
-        const val REAL_INPUT = "p1.txt"
-    }
 
     fun part1(): Int {
         var x = 0
@@ -69,6 +63,6 @@ class Day2(val fileName: String) {
 }
 
 fun main() {
-    println(Day2(REAL_INPUT).part1())
-    println(Day2(REAL_INPUT).part2())
+    println(Day2(DAY2_INPUT).part1())
+    println(Day2(DAY2_INPUT).part2())
 }

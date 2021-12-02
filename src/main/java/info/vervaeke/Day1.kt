@@ -5,11 +5,6 @@ import kotlin.text.Charsets.UTF_8
 
 class Day1(val fileName: String) {
 
-    companion object {
-        const val SAMPLE_INPUT = "p1.sample.txt"
-        const val REAL_INPUT = "p1.txt"
-    }
-
     fun part1(): Int {
         return readFile()
             .windowed(2)
@@ -32,6 +27,6 @@ class Day1(val fileName: String) {
 }
 
 fun main() {
-    println(Day1("p1.txt").part1())
-    println(Day1("p1.txt").part2())
+    println(Day1(DAY1_INPUT).part1())
+    println(Day1(DAY1_INPUT).part2())
 }

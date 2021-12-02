@@ -3,27 +3,35 @@ package info.vervaeke
 import java.io.File
 import kotlin.text.Charsets.UTF_8
 
-fun day1(fileName: String): Int {
-    return readFile(fileName)
-        .windowed(2)
-        .count { it[0] < it[1] }
-}
+class Day1(val fileName: String) {
 
-fun day1b(fileName: String): Int {
-    return readFile(fileName)
-        .windowed(3)
-        .map { it.sum() }
-        .windowed(2)
-        .count { it[0] < it[1] }
-}
+    companion object {
+        const val SAMPLE_INPUT = "p1.sample.txt"
+        const val REAL_INPUT = "p1.txt"
+    }
 
-fun readFile(fileName: String): List<Int> {
-    return File(fileName)
-        .readLines(UTF_8)
-        .map { it.toInt() }
+    fun part1(): Int {
+        return readFile()
+            .windowed(2)
+            .count { it[0] < it[1] }
+    }
+
+    fun part2(): Int {
+        return readFile()
+            .windowed(3)
+            .map { it.sum() }
+            .windowed(2)
+            .count { it[0] < it[1] }
+    }
+
+    fun readFile(): List<Int> {
+        return File(fileName)
+            .readLines(UTF_8)
+            .map { it.toInt() }
+    }
 }
 
 fun main() {
-    println(day1("p1.txt"))
-    println(day1b("p1.txt"))
+    println(Day1("p1.txt").part1())
+    println(Day1("p1.txt").part2())
 }

@@ -28,7 +28,7 @@ class Day2(val fileName: String) {
         return x * depth
     }
 
-    fun part2(): Int {
+    fun part(): Int {
         var pos = 0
         var aim = 0
         var depth = 0
@@ -64,5 +64,5 @@ class Day2(val fileName: String) {
 
 fun main() {
     println(Day2(DAY2_INPUT).part1())
-    println(Day2(DAY2_INPUT).part2())
+    println(Day2(DAY2_INPUT).part())
 }

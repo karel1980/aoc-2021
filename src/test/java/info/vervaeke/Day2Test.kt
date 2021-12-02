@@ -13,12 +13,12 @@ class Day2Test {
 
     @Test
     fun `day2b sample`() {
-        assertThat(Day2(DAY2_SAMPLE).part2()).isEqualTo(900)
+        assertThat(Day2(DAY2_SAMPLE).part()).isEqualTo(900)
     }
 
     @Test
     fun `day2b real deal so I don't fuck up the solution while cleaning up`() {
-        assertThat(Day2(DAY2_INPUT).part2()).isEqualTo(1903644897)
+        assertThat(Day2(DAY2_INPUT).part()).isEqualTo(1903644897)
     }
 
 }

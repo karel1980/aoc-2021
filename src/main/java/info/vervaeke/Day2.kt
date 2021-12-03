@@ -8,7 +8,7 @@ class Day2(val fileName: String) {
     fun part1(): Int {
         var x = 0
         var depth = 0
-        readFile2()
+        readFile()
             .forEach {
                 val dir = it[0]
                 val dist = it[1].toInt()
@@ -32,7 +32,7 @@ class Day2(val fileName: String) {
         var pos = 0
         var aim = 0
         var depth = 0
-        readFile2()
+        readFile()
             .forEach {
                 val dir = it[0]
                 val x = it[1].toInt()
@@ -55,7 +55,7 @@ class Day2(val fileName: String) {
         return pos * depth
     }
 
-    fun readFile2(): List<List<String>> {
+    fun readFile(): List<List<String>> {
         return File(fileName)
             .readLines(UTF_8)
             .map { it.split(" ") }

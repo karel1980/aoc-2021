@@ -79,10 +79,18 @@ def find_winner(boards):
 
 
 def is_winner(board):
+    return has_complete_row(board) or has_complete_column(board)
+
+
+def has_complete_row(board):
     for row in board:
         if row == [None, None, None, None, None]:
             return True
 
+    return False
+
+
+def has_complete_column(board):
     for col in range(5):
         colvalues = [row[col] for row in board]
 

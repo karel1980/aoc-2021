@@ -5,13 +5,13 @@ def day4_part1(input_file):
     draws, boards = read_input(input_file)
 
     last_draw = None
-    winner = None
-    while winner is None:
+    while not has_winner(boards):
         last_draw, draws = draws[0], draws[1:]
         mark_boards(boards, last_draw)
-        winner = find_winner(boards)
 
-    return sum_of_remaining_board_values(winner) * last_draw
+    winner = find_winner(boards)
+
+    return calculate_board_score(winner, last_draw)
 
 
 def day4_part2(input_filename):
@@ -19,13 +19,24 @@ def day4_part2(input_filename):
 
     last_draw = None
     remaining_boards = boards
-    while count_non_winners(remaining_boards) > 0:
+    while len(remaining_boards) > 1:
         last_draw, draws = draws[0], draws[1:]
-        remaining_boards = list(filter(lambda b: not is_winner(b), remaining_boards))
+        remaining_boards = find_non_winners(remaining_boards)
         mark_boards(boards, last_draw)
 
+    if len(remaining_boards) == 0:
+        raise Exception("No boards remaining, did multiple boards win in the last draw?")
+
     loser = remaining_boards[0]
-    return sum_of_remaining_board_values(loser) * last_draw
+    return calculate_board_score(loser, last_draw)
+
+
+def calculate_board_score(board, last_draw):
+    return sum_of_remaining_board_values(board) * last_draw
+
+
+def find_non_winners(boards):
+    return list(filter(lambda b: not is_winner(b), boards))
 
 
 def read_input(filename):
@@ -78,6 +89,10 @@ def find_winner(boards):
     return None
 
 
+def has_winner(boards):
+    return find_winner(boards) is not None
+
+
 def count_non_winners(boards):
     return len(find_winners(boards))
 
@@ -85,13 +100,14 @@ def count_non_winners(boards):
 def find_winners(boards):
     return list(filter(lambda b: not is_winner(b), boards))
 
+
 def is_winner(board):
     return has_complete_row(board) or has_complete_column(board)
 
 
 def has_complete_row(board):
     for row in board:
-        if all([ value is None for value in row ]):
+        if all([value is None for value in row]):
             return True
 
     return False
@@ -99,7 +115,7 @@ def has_complete_row(board):
 
 def has_complete_column(board):
     for column_index in range(len(board[0])):
-        if all([ row[column_index] is None for row in board ]):
+        if all([row[column_index] is None for row in board]):
             return True
 
     return False

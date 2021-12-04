@@ -84,17 +84,15 @@ def is_winner(board):
 
 def has_complete_row(board):
     for row in board:
-        if row == [None, None, None, None, None]:
+        if all([ value is None for value in row ]):
             return True
 
     return False
 
 
 def has_complete_column(board):
-    for col in range(5):
-        colvalues = [row[col] for row in board]
-
-        if colvalues == [None, None, None, None, None]:
+    for column_index in range(len(board[0])):
+        if all([ row[column_index] is None for row in board ]):
             return True
 
     return False
@@ -109,5 +107,5 @@ def find_loser(boards):
 
 
 if __name__ == "__main__":
-    # day4_part1("day4.txt")  # 8304 is too low
-    day4_part2("day4.txt")  # 8304 is too low
+    print("part 1:", day4_part1("day4.txt"))
+    print("part 2:", day4_part2("day4.txt"))

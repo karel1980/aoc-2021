@@ -102,5 +102,5 @@ def part2():
 
 
 if __name__ == "__main__":
-    day4_part1("day4.txt")  # 8304 is too low
-    # part2() #8304 is too low
+    # day4_part1("day4.txt")  # 8304 is too low
+    part2() #8304 is too low

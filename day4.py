@@ -19,7 +19,7 @@ def day4_part2(input_filename):
 
     last_draw = None
     remaining_boards = boards
-    while count_non_winners(boards) > 0:
+    while count_non_winners(remaining_boards) > 0:
         last_draw, draws = draws[0], draws[1:]
         remaining_boards = list(filter(lambda b: not is_winner(b), remaining_boards))
         mark_boards(boards, last_draw)
@@ -78,6 +78,13 @@ def find_winner(boards):
     return None
 
 
+def count_non_winners(boards):
+    return len(find_winners(boards))
+
+
+def find_winners(boards):
+    return list(filter(lambda b: not is_winner(b), boards))
+
 def is_winner(board):
     return has_complete_row(board) or has_complete_column(board)
 
@@ -96,14 +103,6 @@ def has_complete_column(board):
             return True
 
     return False
-
-
-def count_non_winners(boards):
-    return len(list(filter(lambda b: not is_winner(b), boards)))
-
-
-def find_loser(boards):
-    return list(filter(lambda b: not is_winner(b), boards))[0]
 
 
 if __name__ == "__main__":

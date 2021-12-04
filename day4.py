@@ -10,19 +10,13 @@ def read_input(filename):
 
     boardcount = int(len(remain)/6 )
 
-    for l in lines:
-        print(l)
-
     for b in range(boardcount):
-      #print("XXXXX", b)
-      #print(remain[b*6+1:b*6+6])
       board = []
       bl = remain[b*6+1:b*6+6]
       for line in bl:
         board.append([int(x) for x in re.split(" +", line.strip())[:5]])
       boards.append(board)
-      print("appended ", board)
-      
+
     return head,boards
 
 def find_winner(boards):
@@ -51,7 +45,6 @@ def day4_part1(input_file):
     draw = None
     while find_winner(boards) is None:
       draw, draws = draws[0], draws[1:]
-      print("drawn", draw) 
 
       for board in boards:
           for line in board:
@@ -59,15 +52,11 @@ def day4_part1(input_file):
                   if val == draw:
                       line[pos] = None
 
-
     winner = find_winner(boards)
-    print("winner: ", winner)
     winsum = 0
     for line in winner:
         winsum += sum(filter(lambda x: x is not None, line))
 
-    print("winsum: ", winsum)
-    print (winsum * draw)
     return winsum * draw
 
 def count_non_winners(boards):

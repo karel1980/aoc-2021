@@ -1,6 +1,29 @@
 
 import re
 
+def day4_part1(input_file):
+    draws, boards = read_input(input_file)
+
+    draw = None
+    while find_winner(boards) is None:
+        draw, draws = draws[0], draws[1:]
+        mark_boards(boards, draw)
+
+    winner = find_winner(boards)
+    winsum = 0
+    for line in winner:
+        winsum += sum(filter(lambda x: x is not None, line))
+
+    return winsum * draw
+
+
+def mark_boards(boards, draw):
+    for board in boards:
+        for line in board:
+            for pos, val in enumerate(line):
+                if val == draw:
+                    line[pos] = None
+
 def read_input(filename):
     lines = open(filename).readlines()
 
@@ -38,26 +61,6 @@ def is_winner(board):
           return True
 
     return False
-
-def day4_part1(input_file):
-    draws, boards = read_input(input_file)
-
-    draw = None
-    while find_winner(boards) is None:
-      draw, draws = draws[0], draws[1:]
-
-      for board in boards:
-          for line in board:
-              for pos, val in enumerate(line):
-                  if val == draw:
-                      line[pos] = None
-
-    winner = find_winner(boards)
-    winsum = 0
-    for line in winner:
-        winsum += sum(filter(lambda x: x is not None, line))
-
-    return winsum * draw
 
 def count_non_winners(boards):
     return len(list(filter(lambda b: not is_winner(b), boards)))

@@ -45,8 +45,8 @@ def is_winner(board):
 
     return False
 
-def part1():
-    draws, boards = read_input("day4.txt")
+def day4_part1(input_file):
+    draws, boards = read_input(input_file)
 
     draw = None
     while find_winner(boards) is None:
@@ -68,6 +68,7 @@ def part1():
 
     print("winsum: ", winsum)
     print (winsum * draw)
+    return winsum * draw
 
 def count_non_winners(boards):
     return len(list(filter(lambda b: not is_winner(b), boards)))
@@ -104,4 +105,5 @@ def part2():
 
 
 if __name__=="__main__":
-    part2() #8304 is too low
+    day4_part1("day4.txt") #8304 is too low
+    # part2() #8304 is too low

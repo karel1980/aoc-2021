@@ -38,7 +38,6 @@ def is_winner(board):
             return True
 
     for col in range(5):
-        print("xxx", row, col)
         colvalues = [ row[col] for row in board ]
 
         if colvalues == [None, None, None, None, None]:
@@ -46,7 +45,7 @@ def is_winner(board):
 
     return False
 
-if __name__=="__main__":
+def part1():
     draws, boards = read_input("day4.txt")
 
     draw = None
@@ -69,3 +68,40 @@ if __name__=="__main__":
 
     print("winsum: ", winsum)
     print (winsum * draw)
+
+def count_non_winners(boards):
+    return len(list(filter(lambda b: not is_winner(b), boards)))
+
+def find_loser(boards):
+    return list(filter(lambda b: not is_winner(b), boards))[0]
+
+def part2():
+    draws, boards = read_input("day4.txt")
+
+    draw = None
+    non_winners = boards
+    while count_non_winners(boards) > 0:
+      draw, draws = draws[0], draws[1:]
+      print("drawn", draw) 
+
+      non_winners = list(filter(lambda b: not is_winner(b), non_winners))
+
+      for board in boards:
+          for line in board:
+              for pos, val in enumerate(line):
+                  if val == draw:
+                      line[pos] = None
+
+
+    loser = non_winners[0]
+    print("loser: ", loser)
+    winsum = 0
+    for line in loser:
+        winsum += sum(filter(lambda x: x is not None, line))
+
+    print("winsum: ", winsum)
+    print (winsum * draw)
+
+
+if __name__=="__main__":
+    part2() #8304 is too low

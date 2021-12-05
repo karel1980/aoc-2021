@@ -11,7 +11,7 @@ class Day4(val fileName: String) {
         while (!bingoGame.boards.any { it.isWinner() }) {
             bingoGame.drawNext()
         }
-        return bingoGame.lastDrawn * bingoGame.boards.first { it .isWinner() }.sumRemaining()
+        return bingoGame.lastDrawn * bingoGame.winners().first().sumRemaining()
     }
 
     fun part2(): Int {
@@ -29,7 +29,6 @@ class Day4(val fileName: String) {
             .readLines(UTF_8)
 
         val draws = lines.get(0).split(",").map { it.toInt() }
-        (draws)
         val boards = lines.drop(1).chunked(6)
             .map { boardLines ->
                 Board(boardLines.drop(1)
@@ -71,7 +70,7 @@ class Day4(val fileName: String) {
 
         private fun hasCompleteRow() = rows.any { row -> row.all { it == -1 }}
 
-        private fun hasCompleteColumn() = (0 .. rows[0].size - 1).any { colNum ->
+        private fun hasCompleteColumn() = (0 until rows[0].size).any { colNum ->
             rows.all { row -> row[colNum] == -1 }
         }
 

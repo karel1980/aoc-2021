@@ -8,3 +8,9 @@ const val DAY2_SAMPLE = "day2.sample.txt"
 
 const val DAY3_INPUT = "day3.txt"
 const val DAY3_SAMPLE = "day3.sample.txt"
+
+const val DAY4_INPUT = "day4.txt"
+const val DAY4_SAMPLE = "day4.sample.txt"
+
+const val DAY5_INPUT = "day5.txt"
+const val DAY5_SAMPLE = "day5.sample.txt"

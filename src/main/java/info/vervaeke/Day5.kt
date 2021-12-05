@@ -51,7 +51,7 @@ class Day5(val fileName: String) {
         ))
     }
 
-    class World(val rows: List<MutableList<Int>>) {
+    class World(rows: List<MutableList<Int>>) : Grid<Int>(rows) {
         fun increment(cell: Coordinate) {
             rows[cell.row][cell.col] += 1
         }

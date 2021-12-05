@@ -14,3 +14,6 @@ const val DAY4_SAMPLE = "day4.sample.txt"
 
 const val DAY5_INPUT = "day5.txt"
 const val DAY5_SAMPLE = "day5.sample.txt"
+
+const val DAY6_INPUT = "day6.txt"
+const val DAY6_SAMPLE = "day6.sample.txt"

@@ -18,20 +18,22 @@ class Day8Test {
 
     @Test
     fun `day8 buildDigitMap`() {
-        val actual = Day8(sampleLinesOfDay(8)).buildDigitMap(listOf("be", "cfbegad", "cbdgef", "fgaecd", "cgeb", "fdcge", "agebfd", "fecdb", "fabcd", "edb"))
+        val actual = Day8(sampleLinesOfDay(8))
+            .buildDigitMap(listOf("be", "cfbegad", "cbdgef", "fgaecd", "cgeb", "fdcge", "agebfd", "fecdb", "fabcd", "edb")
+                .map { Day8.Digit(it) })
         assertThat(actual)
             .isEqualTo(
                 mapOf(
-                    Pair("abdefg", 0),
-                    Pair("be", 1),
-                    Pair("abcdf", 2),
-                    Pair("bcdef", 3),
-                    Pair("bceg", 4),
-                    Pair("cdefg", 5),
-                    Pair("acdefg", 6),
-                    Pair("bde", 7),
-                    Pair("abcdefg", 8),
-                    Pair("bcdefg", 9),
+                    Pair(Day8.Digit("abdefg"), 0),
+                    Pair(Day8.Digit("be"), 1),
+                    Pair(Day8.Digit("abcdf"), 2),
+                    Pair(Day8.Digit("bcdef"), 3),
+                    Pair(Day8.Digit("bceg"), 4),
+                    Pair(Day8.Digit("cdefg"), 5),
+                    Pair(Day8.Digit("acdefg"), 6),
+                    Pair(Day8.Digit("bde"), 7),
+                    Pair(Day8.Digit("abcdefg"), 8),
+                    Pair(Day8.Digit("bcdefg"), 9),
                 )
             )
     }

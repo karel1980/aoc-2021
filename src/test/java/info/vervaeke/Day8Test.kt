@@ -10,14 +10,17 @@ class Day8Test {
     fun `day8 part 1 sample`() {
         assertThat(Day8(DAY8_SAMPLE).part1()).isEqualTo(26)
     }
+
     @Test
     fun `day8 part 2 sample`() {
         assertThat(Day8(DAY8_SAMPLE).part2()).isEqualTo(61229)
     }
+
     @Test
     fun `day8  countPart1Digits`() {
         assertThat(Day8(DAY8_SAMPLE).countPart1Digits(Pair(listOf(), listOf("aa")))).isEqualTo(1)
     }
+
     @Test
     fun `day8 buildDigitMap`() {
         val actual = Day8(DAY8_SAMPLE).buildDigitMap(listOf("be", "cfbegad", "cbdgef", "fgaecd", "cgeb", "fdcge", "agebfd", "fecdb", "fabcd", "edb"))
@@ -37,6 +40,7 @@ class Day8Test {
                 )
             )
     }
+
     @Test
     fun `day8 part 1`() {
         assertThat(Day8(DAY8_INPUT).part1()).isEqualTo(543)

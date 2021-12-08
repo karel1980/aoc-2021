@@ -16,6 +16,11 @@ class Day9Test {
         assertThat(Day9(sampleLinesOfDay(9)).part2()).isEqualTo(0)
     }
 
+//    @Test
+//    fun `day 9 supporting method`() {
+//        assertThat(Day9(sampleLinesOfDay(9)).foo("foo")).isEqualTo("bar")
+//    }
+
     @Test
     fun `day9 part 1`() {
         assertThat(Day9(inputLinesOfDay(9)).part1()).isEqualTo(0)

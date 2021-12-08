@@ -21,11 +21,9 @@ class Day8(val fileName: String) {
         return readFile().map { getOutput(it) }.sum()
     }
 
-    private fun getOutput(line: Pair<List<String>, List<String>>): Int{
+    private fun getOutput(line: Pair<List<String>, List<String>>): Int {
         val digits = line.first
-        val outputDigits = line.second.drop(1).map {
-            it.toSet().sorted().joinToString("")
-        }
+        val outputDigits = line.second.drop(1).map { it.alphabeticSort() }
 
         val digitMap = buildDigitMap(digits)
 
@@ -36,7 +34,13 @@ class Day8(val fileName: String) {
         return File(fileName)
             .readLines(UTF_8)
             .map { it.split("|") }
-            .map { Pair(it[0].split(" "), it[1].split(" ")) }
+            .map {
+                val digits = it[0].split(" ")
+                    .map { it.alphabeticSort() }
+                val output = it[1].split(" ")
+                    .map { it.alphabeticSort() }
+                Pair(digits, output)
+            }
     }
 
     fun buildDigitMap(digits: List<String>): Map<String, Int> {
@@ -74,13 +78,15 @@ class Day8(val fileName: String) {
             Pair(eight, 8),
             Pair(nine, 9),
             Pair(zero, 0),
-        ).mapKeys { it.key.toSet().sorted().joinToString("") }
+        ).mapKeys { it.key.alphabeticSort() }
     }
 
     private fun commonSegments(firstDigit: String, secondDigit: String) = firstDigit.toSet().intersect(secondDigit.toSet()).size
 
-
 }
+
+private fun String.alphabeticSort() = this.toSet().sorted().joinToString("")
+
 
 fun main() {
     println(Day8(DAY8_INPUT).part1())

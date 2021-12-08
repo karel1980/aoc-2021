@@ -25,17 +25,17 @@ class Day4Test {
 
     @Test
     fun `readFile`() {
-        println(Day4(DAY4_SAMPLE).readFile())
+        println(Day4(sampleFileOfDay(4)).readFile())
     }
 
     @Test
     fun `day4 part 1`() {
-        assertThat(Day4(DAY4_SAMPLE).part1()).isEqualTo(4512)
+        assertThat(Day4(sampleFileOfDay(4)).part1()).isEqualTo(4512)
     }
 
     @Test
     fun `day4 part 2`() {
-        assertThat(Day4(DAY4_SAMPLE).part2()).isEqualTo(1924)
+        assertThat(Day4(sampleFileOfDay(4)).part2()).isEqualTo(1924)
     }
 
 }

@@ -21,12 +21,12 @@ class Day5Test {
 
     @Test
     fun `day5 part 1`() {
-        assertThat(Day5(DAY5_SAMPLE).part1()).isEqualTo(5)
+        assertThat(Day5(sampleFileOfDay(5)).part1()).isEqualTo(5)
     }
 
     @Test
     fun `day5 part 2`() {
-        assertThat(Day5(DAY5_SAMPLE).part2()).isEqualTo(12)
+        assertThat(Day5(sampleFileOfDay(5)).part2()).isEqualTo(12)
     }
 
 }

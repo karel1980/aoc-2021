@@ -27,6 +27,6 @@ class Day1(val fileName: String) {
 }
 
 fun main() {
-    println(Day1(DAY1_INPUT).part1())
-    println(Day1(DAY1_INPUT).part2())
+    println(Day1(inputFileOfDay(1)).part1())
+    println(Day1(inputFileOfDay(1)).part2())
 }

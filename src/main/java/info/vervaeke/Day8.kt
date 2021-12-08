@@ -1,18 +1,15 @@
 package info.vervaeke
 
-import java.io.File
-import kotlin.text.Charsets.UTF_8
-
-class Day8(val fileName: String) {
+class Day8(val inputLines: List<String>) {
 
     fun part1(): Int {
-        return readFile().flatMap { it.second }
+        return parseInputLines().flatMap { it.second }
             .filter { it.length in setOf(2,3,4,7) }
             .size
     }
 
     fun part2(): Int {
-        return readFile().map { getOutput(it.first, it.second) }.sum()
+        return parseInputLines().sumOf { getOutput(it.first, it.second) }
     }
 
     private fun getOutput(digits: List<String>, outputDigits: List<String>): Int {
@@ -20,18 +17,15 @@ class Day8(val fileName: String) {
         return outputDigits.map { digitMap.get(it)!! }.joinToString("").toInt()
     }
 
-    fun readFile(): List<Pair<List<String>, List<String>>> {
-        return File(fileName)
-            .readLines(UTF_8)
-            .map { it.split("|") }
-            .map {
-                val digits = it[0].split(" ")
-                    .map { it.alphabeticSort() }
-                val output = it[1].trim().split(" ")
-                    .map { it.alphabeticSort() }
-                Pair(digits, output)
-            }
-    }
+    fun parseInputLines(): List<Pair<List<String>, List<String>>> = inputLines
+        .map { it.split("|") }
+        .map { parts ->
+            val digits = parts[0].split(" ")
+                .map { it.alphabeticSort() }
+            val output = parts[1].trim().split(" ")
+                .map { it.alphabeticSort() }
+            Pair(digits, output)
+        }
 
     fun buildDigitMap(digits: List<String>): Map<String, Int> {
         // easy ones
@@ -58,16 +52,16 @@ class Day8(val fileName: String) {
         val six = sixSegmentNumbers.first { it != nine && it != zero }
 
         return mapOf(
-            Pair(one, 1),
-            Pair(two, 2),
-            Pair(three, 3),
-            Pair(four, 4),
-            Pair(five, 5),
-            Pair(six, 6),
-            Pair(seven, 7),
-            Pair(eight, 8),
-            Pair(nine, 9),
-            Pair(zero, 0),
+            one to 1,
+            two to 2,
+            three to 3,
+            four to 4,
+            five to 5,
+            six to 6,
+            seven to 7,
+            eight to 8,
+            nine to 9,
+            zero to 0,
         ).mapKeys { it.key.alphabeticSort() }
     }
 
@@ -79,7 +73,7 @@ private fun String.alphabeticSort() = this.toSet().sorted().joinToString("")
 
 
 fun main() {
-    println(Day8(DAY8_INPUT).part1())
-    println(Day8(DAY8_INPUT).part2())
+    println(Day8(inputLinesOfDay(8)).part1())
+    println(Day8(inputLinesOfDay(8)).part2())
 }
 

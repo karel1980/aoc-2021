@@ -7,17 +7,17 @@ class Day1Test {
 
     @Test
     fun `day1 sample`() {
-        assertThat(Day1(DAY1_SAMPLE).part1()).isEqualTo(7)
+        assertThat(Day1(sampleFileOfDay(1)).part1()).isEqualTo(7)
     }
 
     @Test
     fun `day1b sample`() {
-        assertThat(Day1(DAY1_SAMPLE).part2()).isEqualTo(5)
+        assertThat(Day1(sampleFileOfDay(1)).part2()).isEqualTo(5)
     }
 
     @Test
     fun `readFile returns list of ints`() {
-        assertThat(Day1(DAY1_SAMPLE).readFile())
+        assertThat(Day1(sampleFileOfDay(1)).readFile())
             .isEqualTo(listOf(199, 200, 208, 210, 200, 207, 240, 269, 260, 263))
     }
 

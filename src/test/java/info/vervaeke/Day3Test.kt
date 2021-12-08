@@ -8,12 +8,12 @@ class Day3Test {
 
     @Test
     fun `day3 part1 sample`() {
-        assertThat(Day3(DAY3_SAMPLE).part1()).isEqualTo(198)
+        assertThat(Day3(sampleFileOfDay(3)).part1()).isEqualTo(198)
     }
 
     @Test
     fun `day3 part 2 sample`() {
-        assertThat(Day3(DAY3_SAMPLE).part2()).isEqualTo(42)
+        assertThat(Day3(sampleFileOfDay(3)).part2()).isEqualTo(42)
     }
 
 }

@@ -13,7 +13,7 @@ class Day3Test {
 
     @Test
     fun `day3 part 2 sample`() {
-        assertThat(Day3(sampleFileOfDay(3)).part2()).isEqualTo(42)
+        assertThat(Day3(sampleFileOfDay(3)).part2()).isEqualTo(230)
     }
 
 }

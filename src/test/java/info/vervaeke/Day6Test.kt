@@ -18,7 +18,7 @@ class Day6Test {
 
     @Test
     fun `day6 part 2`() {
-        assertThat(Day6(sampleFileOfDay(6)).part2()).isEqualTo(42)
+        assertThat(Day6(sampleFileOfDay(6)).part2()).isEqualTo(26984457539L)
     }
 
 }

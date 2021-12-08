@@ -6,14 +6,18 @@ import kotlin.text.Charsets.UTF_8
 class Day6(val fileName: String) {
 
     fun part1(): Long {
-        return countFishAfterNDays(255)
+        return countFishAfterNDays(80)
+    }
+
+    fun part2(): Long {
+        return countFishAfterNDays(256)
     }
 
     private fun countFishAfterNDays(numDays: Int): Long {
         var fish = readFile().lines
         var counts = fish.groupingBy { it }.eachCount().mapValues { it.value.toLong() }
 
-        (0..numDays).forEach {
+        (0 until numDays).forEach {
             counts = iteration2(counts).toMap()
         }
         return counts.values.sum()
@@ -32,10 +36,6 @@ class Day6(val fileName: String) {
         result.put(8, values.get(0)?:0)
 
         return result
-    }
-
-    fun part2(): Long {
-        return 0
     }
 
     fun readFile(): Day6Input {

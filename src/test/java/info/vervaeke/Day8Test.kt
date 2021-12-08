@@ -18,7 +18,8 @@ class Day8Test {
 
     @Test
     fun `day8  countPart1Digits`() {
-        assertThat(Day8(DAY8_SAMPLE).countPart1Digits(Pair(listOf(), listOf("aa")))).isEqualTo(1)
+        val numberOfSegments = Pair(listOf<String>(), listOf("aa"))
+        assertThat(Day8(DAY8_SAMPLE).countDigitsWithNumberOfSegmentsIn(numberOfSegments.second, setOf(2, 3, 4, 7))).isEqualTo(1)
     }
 
     @Test

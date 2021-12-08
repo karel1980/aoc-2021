@@ -6,15 +6,9 @@ import kotlin.text.Charsets.UTF_8
 class Day8(val fileName: String) {
 
     fun part1(): Int {
-        return count1478(readFile())
-    }
-
-    private fun count1478(lines: List<Pair<List<String>, List<String>>>): Int {
-        return lines.map { countPart1Digits(it) }.sum()
-    }
-
-    fun countPart1Digits(line: Pair<List<String>, List<String>>): Int {
-        return line.second.filter { it.length in setOf(2, 3, 4, 7) }.count()
+        return readFile().flatMap { it.second }
+            .filter { it.length in setOf(2,3,4,7) }
+            .size
     }
 
     fun part2(): Int {

@@ -14,16 +14,16 @@ class Day6(val fileName: String) {
     }
 
     private fun countFishAfterNDays(numDays: Int): Long {
-        var fish = readFile().lines
-        var counts = fish.groupingBy { it }.eachCount().mapValues { it.value.toLong() }
+        val fish = readFile().lines
+        val counts = fish.groupingBy { it }.eachCount().mapValues { it.value.toLong() }
 
-        (0 until numDays).forEach {
-            counts = iteration2(counts).toMap()
-        }
-        return counts.values.sum()
+        return (0 until numDays)
+            .fold(counts) { c,n -> nextDay(c) }
+            .values
+            .sum()
     }
 
-    fun iteration2(values: Map<Long, Long>) : Map<Long, Long> {
+    fun nextDay(values: Map<Long, Long>) : Map<Long, Long> {
         val result = mutableMapOf<Long, Long>()
         result.put(0, values.get(1)?:0)
         result.put(1, values.get(2)?:0)

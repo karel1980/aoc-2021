@@ -12,15 +12,11 @@ class Day8(val fileName: String) {
     }
 
     fun part2(): Int {
-        return readFile().map { getOutput(it) }.sum()
+        return readFile().map { getOutput(it.first, it.second) }.sum()
     }
 
-    private fun getOutput(line: Pair<List<String>, List<String>>): Int {
-        val digits = line.first
-        val outputDigits = line.second.drop(1).map { it.alphabeticSort() }
-
+    private fun getOutput(digits: List<String>, outputDigits: List<String>): Int {
         val digitMap = buildDigitMap(digits)
-
         return outputDigits.map { digitMap.get(it)!! }.joinToString("").toInt()
     }
 
@@ -31,7 +27,7 @@ class Day8(val fileName: String) {
             .map {
                 val digits = it[0].split(" ")
                     .map { it.alphabeticSort() }
-                val output = it[1].split(" ")
+                val output = it[1].trim().split(" ")
                     .map { it.alphabeticSort() }
                 Pair(digits, output)
             }

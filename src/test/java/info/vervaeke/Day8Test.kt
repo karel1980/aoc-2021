@@ -17,12 +17,6 @@ class Day8Test {
     }
 
     @Test
-    fun `day8  countPart1Digits`() {
-        val numberOfSegments = Pair(listOf<String>(), listOf("aa"))
-        assertThat(Day8(DAY8_SAMPLE).countDigitsWithNumberOfSegmentsIn(numberOfSegments.second, setOf(2, 3, 4, 7))).isEqualTo(1)
-    }
-
-    @Test
     fun `day8 buildDigitMap`() {
         val actual = Day8(DAY8_SAMPLE).buildDigitMap(listOf("be", "cfbegad", "cbdgef", "fgaecd", "cgeb", "fdcge", "agebfd", "fecdb", "fabcd", "edb"))
         assertThat(actual)

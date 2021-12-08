@@ -1,9 +1,6 @@
 package info.vervaeke
 
-import java.io.File
-import kotlin.text.Charsets.UTF_8
-
-class Day6(val fileName: String) {
+class Day6(val inputLines: List<String>) {
 
     fun part1(): Long {
         return countFishAfterNDays(80)
@@ -14,7 +11,7 @@ class Day6(val fileName: String) {
     }
 
     private fun countFishAfterNDays(numDays: Int): Long {
-        val fish = readFile().lines
+        val fish = parseInput()
         val counts = fish.groupingBy { it }.eachCount().mapValues { it.value.toLong() }
 
         return (0 until numDays)
@@ -38,19 +35,14 @@ class Day6(val fileName: String) {
         return result
     }
 
-    fun readFile(): Day6Input {
-        val lines = File(fileName)
-            .readLines(UTF_8)
-            .get(0)
-
-        return Day6Input(lines.split(",").map{ it.toLong()})
+    fun parseInput(): List<Long> {
+        return inputLines[0].split(",").map{ it.toLong()}
     }
 
-    data class Day6Input(val lines: List<Long>)
 }
 
 fun main() {
-    println(Day6(inputFileOfDay(6)).part1())
-    println(Day6(inputFileOfDay(6)).part2())
+    println(Day6(inputLinesOfDay(6)).part1())
+    println(Day6(inputLinesOfDay(6)).part2())
 }
 

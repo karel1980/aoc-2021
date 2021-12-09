@@ -34,7 +34,31 @@ class Day9(val inputLines: List<String>) {
         }
     }
 
-    fun part2() = parseInput().size
+    fun part2(): Int {
+        val grid = parseInput()
+        val lowPoints = findLowPoints(grid)
+
+        val largestBasins: List<List<Cell>> = lowPoints.map { basinOf(grid, it) }
+            .sortedBy { it.size }
+            .takeLast(3)
+
+        return largestBasins[0].size * largestBasins[1].size * largestBasins[2].size
+    }
+
+    private fun basinOf(grid: List<List<Int>>, cell: Cell): List<Cell> {
+        var candidates = setOf(cell)
+        var seen = mutableSetOf<Cell>()
+
+        while (candidates.isNotEmpty()) {
+            val candidate = candidates.first()
+            seen.add(candidate)
+            val adjacent = adjacentCells(grid, candidate.row, candidate.col)
+                .filter { it.value > candidate.value && it.value < 9 }
+            candidates = (candidates.drop(1) + adjacent.filter { it !in seen }).toSet()
+        }
+
+        return seen.toList()
+    }
 
     fun parseInput(): List<List<Int>> {
         return inputLines.map {

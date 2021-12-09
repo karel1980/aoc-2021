@@ -1,6 +1,6 @@
 package info.vervaeke
 
-class Day8(val inputLines: List<String>) {
+class Day8(private val inputLines: List<String>) {
 
     fun part1(): Int {
         return parseInputLines().flatMap { it.second }

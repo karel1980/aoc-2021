@@ -8,7 +8,7 @@ class Day9Test {
 
     @Test
     fun `day9 part 1 sample`() {
-        assertThat(Day9(sampleLinesOfDay(9)).part1()).isEqualTo(0)
+        assertThat(Day9(sampleLinesOfDay(9)).part1()).isEqualTo(15)
     }
 
     @Test

@@ -28,7 +28,15 @@ class Day11() {
     }
 
     fun part2(octopi: List<List<Int>>): Int {
-        return 0
+        var state = octopi
+        var step = 0
+
+        while (!state.all { row -> row.all { it == 0 }}) {
+            state = step(state)
+            step += 1
+        }
+
+        return step
     }
 
     fun step(octopi: List<List<Int>>): List<List<Int>> {

@@ -139,7 +139,14 @@ class Day11Test {
     fun `part 2 sample`() {
         val actual = Day11().part2(Day11.parse(sampleLinesOfDay(11)))
         assertThat(actual)
-            .isEqualTo(42)
+            .isEqualTo(195)
+    }
+
+    @Test
+    fun `part 2`() {
+        val actual = Day11().part2(Day11.parse(inputLinesOfDay(11)))
+        assertThat(actual)
+            .isEqualTo(195)
     }
 
 }

@@ -8,9 +8,32 @@ class Day15(val lines: List<List<Int>>) {
         fun parse(lines: List<String>): List<List<Int>> {
             return lines.map { it.map { it.toString().toInt() } }
         }
+
+        fun parse2(lines: List<String>): List<List<Int>> {
+            return extendVertically(parse(lines).map { extendHorizontally(it) })
+        }
+
+        private fun extendHorizontally(row: List<Int>): List<Int> {
+            return (0 until 5).flatMap { increment(row, it) }
+        }
+
+        private fun increment(row: List<Int>, increment: Int): List<Int> {
+            return row.map {
+                ((it+8+increment)%9)+1
+            }
+        }
+
+        private fun extendVertically(rows: List<List<Int>>): List<List<Int>> {
+            return (0 until 5).flatMap { value -> rows.map { increment(it, value) } }
+        }
+
     }
 
     fun part1(): Int {
+        return findShortestPath().get(Coordinate(lines.size - 1, lines.last().size - 1))!!.score
+    }
+
+    fun part2(): Int {
         return findShortestPath().get(Coordinate(lines.size - 1, lines.last().size - 1))!!.score
     }
 
@@ -20,7 +43,7 @@ class Day15(val lines: List<List<Int>>) {
         var candidates = LinkedList(listOf(startPath))
 
         while (candidates.isNotEmpty()) {
-            println("Remaining candidates: ${candidates.size}")
+//            println("Remaining candidates: ${candidates.size}")
             val path = candidates.pop()
             val extensions = extend(path)
             val improvements = extensions.filter {

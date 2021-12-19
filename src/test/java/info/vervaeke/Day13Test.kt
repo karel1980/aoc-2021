@@ -194,4 +194,18 @@ class Day13Test {
             .isEqualTo(0)
     }
 
+    @Test
+    fun `part2`() {
+        // 1020 is too high :( -> Dammit I didn't read to only do the first fild
+        // 102 is too low :( -> Same problem
+        assertThat(Day13.part2(Day13.parse(inputLinesOfDay(13))))
+            .isEqualTo("""
+                .##..#..#..##...##..###...##...##..#..#
+                #..#.#..#.#..#.#..#.#..#.#..#.#..#.#..#
+                #..#.####.#....#....#..#.#....#..#.#..#
+                ####.#..#.#.##.#....###..#.##.####.#..#
+                #..#.#..#.#..#.#..#.#....#..#.#..#.#..#
+                #..#.#..#..###..##..#.....###.#..#..##.""".trimIndent())
+    }
+
 }

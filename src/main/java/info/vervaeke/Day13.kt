@@ -36,16 +36,13 @@ class Day13() {
             return originalPaper.fold(instructions.first()).points.size
         }
 
-        fun part2(input: Pair<Paper, List<FoldInstruction>>): Int {
+        fun part2(input: Pair<Paper, List<FoldInstruction>>): String {
             val originalPaper = input.first
             val instructions = input.second
 
             val result = instructions.fold(originalPaper) { paper, instr -> paper.fold(instr) }
 
-            println(result.pretty())
-            return result
-                .points.size
-
+            return result.pretty()
         }
     }
 

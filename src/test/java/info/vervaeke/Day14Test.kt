@@ -37,6 +37,40 @@ class Day14Test {
     }
 
     @Test
+    fun `createPairCounts`() {
+        val sample = Day14.parse(SAMPLE1)
+        assertThat(Day14().createPairCounts(sample.first))
+            .isEqualTo(
+                mapOf(
+                    "NN" to 1L,
+                    "NC" to 1L,
+                    "CB" to 1L,
+                )
+            )
+    }
+
+    @Test
+    fun `insert2`() {
+        val sample = Day14.parse(SAMPLE1)
+        assertThat(Day14().insert2(Day14().createPairCounts("NNCB"), sample.second))
+            .isEqualTo(
+                Day14().createPairCounts("NCNBCHB")
+            )
+        assertThat(Day14().insert2(Day14().createPairCounts("NCNBCHB"), sample.second))
+            .isEqualTo(
+                Day14().createPairCounts("NBCCNBBBCBHCB")
+            )
+        assertThat(Day14().insert2(Day14().createPairCounts("NBCCNBBBCBHCB"), sample.second))
+            .isEqualTo(
+                Day14().createPairCounts("NBBBCNCCNBBNBNBBCHBHHBCHB")
+            )
+        assertThat(Day14().insert2(Day14().createPairCounts("NBBBCNCCNBBNBNBBCHBHHBCHB"), sample.second))
+            .isEqualTo(
+                Day14().createPairCounts("NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB")
+            )
+    }
+
+    @Test
     fun `insert`() {
         val sample = Day14.parse(SAMPLE1)
         assertThat(Day14().insert(sample.first, sample.second))
@@ -58,9 +92,23 @@ class Day14Test {
     }
 
     @Test
+    fun `part2 sample`() {
+        val parsed = Day14.parse(SAMPLE1)
+        assertThat(Day14().part2(parsed.first, parsed.second))
+            .isEqualTo(2188189693529)
+    }
+
+    @Test
     fun `part1`() {
         val parsed = Day14.parse(inputLinesOfDay(14))
         assertThat(Day14().part1(parsed.first, parsed.second))
+            .isEqualTo(4517)
+    }
+
+    @Test
+    fun `part2`() {
+        val parsed = Day14.parse(inputLinesOfDay(14))
+        assertThat(Day14().part2(parsed.first, parsed.second))
             .isEqualTo(1588)
     }
 

@@ -56,6 +56,12 @@ class Day16Test {
     }
 
     @Test
+    fun `part 2`() {
+        assertThat(Day16.parse(inputLinesOfDay(16).get(0)).value())
+            .isEqualTo(991)
+    }
+
+    @Test
     fun `parseLong`() {
         println("11111111100101001100010111000100".toLong(2))
     }

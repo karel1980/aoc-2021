@@ -18,6 +18,7 @@ class Day16 {
         fun typeId(): Int
         fun usedBits(): Int
         fun versionSum(): Int
+        fun value(): Long
     }
 
     data class RawPacket(val payload: String) {
@@ -99,7 +100,7 @@ class Day16 {
         }
     }
 
-    data class LiteralPacket(val version: Int, val typeId: Int, val value: Long, val usedBits: Int): Packet {
+    data class LiteralPacket(val version: Int, val typeId: Int, val value: Long, val usedBits: Int) : Packet {
         override fun version(): Int {
             return version
         }
@@ -115,9 +116,13 @@ class Day16 {
         override fun versionSum(): Int {
             return version
         }
+
+        override fun value(): Long {
+            return value
+        }
     }
 
-    data class OperatorPacket(val version: Int, val typeId: Int, val subPackets: List<Packet>, val usedBits: Int): Packet {
+    data class OperatorPacket(val version: Int, val typeId: Int, val subPackets: List<Packet>, val usedBits: Int) : Packet {
         override fun version(): Int {
             return version
         }
@@ -133,9 +138,37 @@ class Day16 {
         override fun versionSum(): Int {
             return version + subPackets.sumOf { it.versionSum() }
         }
+
+        override fun value(): Long {
+            return when (typeId) {
+                0 -> subPackets.sumOf { it.value() }
+                1 -> subPackets.fold(1L) { prod, pack -> prod * pack.value() }
+                2 -> subPackets.minOf { it.value() }
+                3 -> subPackets.maxOf { it.value() }
+                5 -> if (subPackets[0].value() > subPackets[1].value()) {
+                    1
+                } else {
+                    0
+                }
+                6 -> if (subPackets[0].value() < subPackets[1].value()) {
+                    1
+                } else {
+                    0
+                }
+                7 -> if (subPackets[0].value() == subPackets[1].value()) {
+                    1
+                } else {
+                    0
+                }
+                else -> TODO("unsupported")
+//            Packets with type ID 2 are minimum packets - their value is the minimum of the values of their sub-packets.
+//            Packets with type ID 3 are maximum packets - their value is the maximum of the values of their sub-packets.
+//            Packets with type ID 5 are greater than packets - their value is 1 if the value of the first sub-packet is greater than the value of the second sub-packet; otherwise, their value is 0. These packets always have exactly two sub-packets.
+//            Packets with type ID 6 are less than packets - their value is 1 if the value of the first sub-packet is less than the value of the second sub-packet; otherwise, their value is 0. These packets always have exactly two sub-packets.
+//            Packets with type ID 7 are equal to packets - their value is 1 if the value of the first sub-packet is equal to the value of the second sub-packet; otherwise, their value is 0. These packets always have exactly two sub-packets.
+            }
+        }
+
     }
-
-
 }
-
 

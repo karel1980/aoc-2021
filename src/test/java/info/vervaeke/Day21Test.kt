@@ -171,7 +171,7 @@ class Day21Test {
 
     @Test
     fun `part2`() {
-        assertThat(Day21.part2(8, 9)).isEqualTo(100)
+        assertThat(Day21.part2(8, 9)).isEqualTo(346642902541848)
     }
 
     @Test

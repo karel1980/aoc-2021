@@ -10,7 +10,7 @@ class Day22 {
         fun parseInstruction(str: String): Instruction {
             val regex = "([a-z]*) x=(.*),y=(.*),z=(.*)".toRegex()
 
-            println("parsing $str")
+//            println("parsing $str")
             val groups = regex.matchEntire(str)!!.groupValues
             val state = if (groups[1] == "on") State.ON else State.OFF
             val xyz = groups.drop(2).take(3).map { it.split("..").map { it.toInt() } }
@@ -30,8 +30,7 @@ class Day22 {
                 .filter { it.cuboid.corner2.y in limits }
                 .filter { it.cuboid.corner1.z in limits }
                 .filter { it.cuboid.corner2.z in limits }
-            var result = totalOnCubes(instructions)
-            return result
+            return totalOnCubes(instructions)
         }
 
         fun part2(instructions: List<Instruction>): Long {
@@ -39,6 +38,7 @@ class Day22 {
         }
 
         private fun totalOnCubes(instructions: List<Instruction>): Long {
+            val instructions = filterInstructions(instructions)
             val xs = (instructions.map { it.cuboid.corner1.x } + instructions.map { it.cuboid.corner2.x + 1 }).toSortedSet().toList().sorted()
             val ys = (instructions.map { it.cuboid.corner1.y } + instructions.map { it.cuboid.corner2.y + 1 }).toSortedSet().toList().sorted()
             val zs = (instructions.map { it.cuboid.corner1.z } + instructions.map { it.cuboid.corner2.z + 1 }).toSortedSet().toList().sorted()
@@ -59,13 +59,13 @@ class Day22 {
                 println("$index")
                 ys.zipWithNext().forEach { dy ->
                     zs.zipWithNext().forEach { dz ->
-                        val volume = (dx.second - dx.first) * (dy.second - dy.first) * (dz.second - dz.first)
-        //                        println("cubelet $dx $dy $dz")
-        //                        println("volume $volume")
+                        val volume = (dx.second.toLong() - dx.first.toLong()) * (dy.second.toLong() - dy.first.toLong()) * (dz.second.toLong() - dz.first.toLong())
+                        //                        println("cubelet $dx $dy $dz")
+                        //                        println("volume $volume")
                         val lastInstruction = instructions.lastOrNull() {
                             dx.first in it.cuboid.corner1.x..it.cuboid.corner2.x && dy.first in it.cuboid.corner1.y..it.cuboid.corner2.y && dz.first in it.cuboid.corner1.z..it.cuboid.corner2.z
                         }
-        //                        println("last matching instruction: $lastInstruction")
+                        //                        println("last matching instruction: $lastInstruction")
                         if (lastInstruction != null && lastInstruction.state == State.ON) {
                             result += volume
                         }
@@ -73,6 +73,21 @@ class Day22 {
                 }
             }
             return result
+        }
+
+        fun filterInstructions(instructions: List<Instruction>): List<Instruction> {
+            val result = instructions.filterIndexed { index, instruction ->
+                !uselessInstruction(instruction, instructions.drop(index + 1))
+            }
+
+            println("${instructions.size - result.size} useless instructions dropped")
+            return result
+        }
+
+        fun uselessInstruction(instruction: Instruction, laterInstructions: List<Instruction>): Boolean {
+            return laterInstructions.any {
+                instruction.cuboid.completelyInside(it.cuboid)
+            }
         }
 
 
@@ -84,7 +99,11 @@ class Day22 {
         ON(1), OFF(0)
     }
 
-    data class Coordinate(val x: Int, val y: Int, val z: Int)
+    data class Coordinate(val x: Int, val y: Int, val z: Int) {
+        fun isInside(cuboid: Cuboid): Boolean = x in cuboid.corner1.x..cuboid.corner2.x &&
+                y in cuboid.corner1.y..cuboid.corner2.y &&
+                z in cuboid.corner1.z..cuboid.corner2.z
+    }
 
     data class Cuboid(val corner1: Coordinate, val corner2: Coordinate) {
         val volume = calculateVolume()
@@ -106,6 +125,10 @@ class Day22 {
             }
 //            println("volume for $corner1 to $corner2 is $vol")
             return vol
+        }
+
+        fun completelyInside(other: Cuboid): Boolean {
+            return corner1.isInside(other) && corner2.isInside(other)
         }
     }
 

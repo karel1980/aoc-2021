@@ -1,5 +1,6 @@
 package info.vervaeke
 
+import info.vervaeke.Day22.Companion.parseInstruction
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -137,12 +138,24 @@ class Day22Test {
             .isEqualTo(590784L)
     }
 
-//    @Test
+    @Test
     fun `part 1`() {
         val instructions = Day22.parse(inputLinesOfDay(22))
 
         assertThat(Day22.part1(instructions))
             .isEqualTo(648681L)
+    }
+
+    @Test
+    fun `filtering instructions`() {
+        val instructions = """
+        on x=5..6,y=5..6,z=5..6
+        on x=1..10,y=1..10,z=1..10""".trimIndent().lines().map(Day22::parseInstruction)
+
+        val filteredInstructions = Day22.filterInstructions(instructions)
+
+        assertThat(filteredInstructions)
+            .containsExactly(instructions[1])
     }
 
     @Test
@@ -153,7 +166,7 @@ class Day22Test {
             .isEqualTo(2758514936282235L)
     }
 
-//    @Test
+    @Test
     fun `part 2`() {
         val instructions = Day22.parse(inputLinesOfDay(22))
 
